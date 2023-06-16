@@ -23,7 +23,7 @@
 ## 🔋 Repository Contact
 | Full Name						 |CONTACT|
 |----------|-----------------|
-| **XXX**  | XXX@XXX.com      |
+| **Kuang Bo**   |   1214966109@qq.com |
 | **XXX**  | XXX@XXX.com      |
 
 ## 🔒 Background
