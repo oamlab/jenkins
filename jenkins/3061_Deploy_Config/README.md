@@ -82,7 +82,9 @@ JDK：
 
 ```bash
 # 下载安装包
-wget https://download.oracle.com/otn/java/jdk/11.0.2+9/f51449fcd52f4d52b93a989c5c56ed3c/jdk-11.0.2_linux-x64_bin.tar.gz
+# https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html
+# 需要登录
+wget https://download.oracle.com/xxx????xxx/jdk-11.0.2_linux-x64_bin.tar.gz
 
 # 解压安装
 tar -zxf jdk-11.0.2_linux-x64_bin.tar.gz 
@@ -100,7 +102,8 @@ mv jdk-11.0.2 /opt/service/jdk/
 
 ```bash
 # 下载安装包
-wget https://repo.xxxxxx.com/jenkins/war-stable/2.387.1/jenkins.war
+# https://mirrors.jenkins.io/war-stable
+wget https://mirrors.jenkins.io/war-stable/2.387.1/jenkins.war
 
 # 安装依赖
 yum install fontconfig
