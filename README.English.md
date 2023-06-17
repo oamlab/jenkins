@@ -24,7 +24,6 @@
 | Full Name						 |CONTACT|
 |----------|-----------------|
 | **Kuang Bo**   |   1214966109@qq.com |
-| **XXX**  | XXX@XXX.com      |
 
 ## 🔒 Background
 - XXX
