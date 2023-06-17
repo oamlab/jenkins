@@ -64,15 +64,11 @@ Jenkins 是由 Java 开发的一个可扩展的持续集成引擎，前身为 `H
 
 > https://get.jenkins.io/war-stable/
 
-同时也需要 JDK 11 以上版本，这些都可以去华为镜像站下载。
-
-Jenkins：
-
-> https://repo.huaweicloud.com/jenkins/
+同时也需要 JDK 11 以上版本
 
 JDK：
 
-> https://repo.huaweicloud.com/java/jdk/
+> https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html
 
 如果想要使用 Tomcat 运行 war，可以看看官网的要求：
 
@@ -86,7 +82,7 @@ JDK：
 
 ```bash
 # 下载安装包
-wget https://repo.huaweicloud.com/java/jdk/11.0.2+9/jdk-11.0.2_linux-x64_bin.tar.gz
+wget https://download.oracle.com/otn/java/jdk/11.0.2+9/f51449fcd52f4d52b93a989c5c56ed3c/jdk-11.0.2_linux-x64_bin.tar.gz
 
 # 解压安装
 tar -zxf jdk-11.0.2_linux-x64_bin.tar.gz 
@@ -104,7 +100,7 @@ mv jdk-11.0.2 /opt/service/jdk/
 
 ```bash
 # 下载安装包
-wget https://repo.huaweicloud.com/jenkins/war-stable/2.387.1/jenkins.war
+wget https://repo.xxxxxx.com/jenkins/war-stable/2.387.1/jenkins.war
 
 # 安装依赖
 yum install fontconfig
