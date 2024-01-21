@@ -44,6 +44,10 @@
 - ..
 - .
 
+## 📃 其他资料
+- 资料1：https://gitee.com/oamlab/oamlab/tree/main/OAMLab/401_%E8%BF%90%E7%BB%B4%E5%AE%9E%E9%AA%8C/2023-04
+- 资料2：https://gitee.com/oamlab/oamlab/tree/main/OAMLab/401_%E8%BF%90%E7%BB%B4%E5%AE%9E%E9%AA%8C/2023-06
+
 ## 📶 技术交流群
 深圳运维圈 QQ交流群：216589280 [点击加入](https://jq.qq.com/?_wv=1027&k=tdDtDoUp)
 
