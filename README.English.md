@@ -7,8 +7,8 @@
 </p>
 
 <p align="center">
-   <a href="https://github.com/oamlab/jenkins">github</a> | 
-   <a href="https://gitee.com/oamlab/jenkins">gitee</a> | 
+   <a href="https://github.com/oamlab/jenkins">GitHub</a> | 
+   <a href="https://gitee.com/oamlab/jenkins">Gitee</a> | 
    <a href="./README.English.md">English</a>
 </p>
 

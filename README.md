@@ -7,8 +7,8 @@
 </p>
 
 <p align="center">
-   <a href="https://github.com/oamlab/jenkins">github</a> | 
-   <a href="https://gitee.com/oamlab/jenkins">gitee</a> | 
+   <a href="https://github.com/oamlab/jenkins">GitHub</a> | 
+   <a href="https://gitee.com/oamlab/jenkins">Gitee</a> | 
    <a href="./README.English.md">English</a>
 </p>
 
@@ -20,7 +20,7 @@
 - [在线文档：https://github.com/oamlab/jenkins](https://github.com/oamlab/jenkins)
 - [Online Documentation：https://github.com/oamlab/jenkins](https://github.com/oamlab/jenkins/blob/main/README.English.md)
 
-*[国内访问请使用国内资料仓gitee入口，点击进入](https://gitee.com/oamlab/jenkins)
+*[国内访问请使用国内资料仓Gitee入口，点击进入](https://gitee.com/oamlab/jenkins)
 
 ## 🔋 仓库联系人
 | 姓名	    | 联系方式              |
