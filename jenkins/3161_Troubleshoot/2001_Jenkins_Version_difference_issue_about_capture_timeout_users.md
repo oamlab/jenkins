@@ -1,4 +1,13 @@
-### 背景
+- OAMlab
+- https://github.com/oamlab
+
+# Jenkins版本差异导致流水线捕获timeout用户异常问题修复(Jenkins's version difference issue about capture timeout users)
+
+---
+
+# Jenkins
+
+## 背景
 
 **1.需求**
 在jenkins pipeline中实现使用`Input` 带有`timeout`的输入步骤，并在达到超时时继续执行（有默认值）流水线。
@@ -89,7 +98,7 @@ Possible solutions: getAt(java.lang.String), use([Ljava.lang.Object;), use(java.
 	at java.base/java.lang.Thread.run(Thread.java:833)
 Finished: FAILURE
 ```
-### 问题分析
+## 问题分析
 **问题推断:**
 报错关键字`No signature of method`,肯定是升级jenkins后的某些方法发生变化导致。
 
@@ -228,7 +237,7 @@ Finished: FAILURE
 
 >没有去jenkins源码中详细查验哪个版本进行的修改。
 
-### 修复问题
+## 修复问题
 在新的jenkins版本中，使用`Input` 带有`timeout`的输入步骤中`Abort`和`timeout`的`Causes`发生了改变，`timeout`中没有了`.getUser()`方法，于是使用`Causes`做正则匹配来区分是`Abort`和`timeout`,并进行赋值来执行不同的操作。
 
 代码如下：
@@ -275,5 +284,5 @@ node {
 ```
 问题解决
 
-###  参考文档
+##  参考文档
 https://support.cloudbees.com/hc/en-us/articles/226554067-Pipeline-How-to-add-an-input-step-with-timeout-that-continues-if-timeout-is-reached-using-a-default-value
