@@ -21,9 +21,10 @@
 - [Online Documentation：https://github.com/oamlab/jenkins](https://github.com/oamlab/jenkins/blob/main/README.English.md)
 
 ## 🔋 Repository Contact
-| Full Name						 |CONTACT|
-|----------|-----------------|
-| **Kuang Bo**   |   1214966109@qq.com |
+| Full Name    | CONTACT           |
+|--------------|-------------------|
+| **Kuang Bo** | 1214966109@qq.com |
+| **Qiu Ke**   | 23198985@qq.com   |
 
 ## 🔒 Background
 - XXX
@@ -38,6 +39,7 @@
 - [Compile or Package](./jenkins/3021_Compile_or_Package)
 - [Deploy Config](./jenkins/3061_Deploy_Config)
 - [Performance Testing](./jenkins/3121_Performance_Testing)
+- [Troubleshoot](./jenkins/3161_Troubleshoot)
 - ...
 - ..
 - .
