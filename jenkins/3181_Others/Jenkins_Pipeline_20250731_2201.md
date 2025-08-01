@@ -1,7 +1,3 @@
-<img width="2559" height="1515" alt="42a6f39c3a62d2f43656d7dbf2e7962" src="https://github.com/user-attachments/assets/4e812ee7-8e0b-4710-baab-92bf585078db" />
-
-
-
 - OAMlab
 - https://github.com/oamlab
 
