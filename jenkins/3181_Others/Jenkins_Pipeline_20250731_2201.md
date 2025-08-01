@@ -392,7 +392,7 @@ CMD ["sh","-c","/app/code"]
      }
      stages {
          stage("获取代码。。。") {
-             steps {
+                steps {
                  git branch: 'main', credentialsId: 'gitlab', url: 'http://192.168.11.116:8080/sre/code.git'
                  sh "ls -l ./"
                  }
