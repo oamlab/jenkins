@@ -407,14 +407,6 @@ spec:
         }
     }
     stages {
-        stage("检查 Docker 配置") {
-            steps {
-                container("docker") {
-                    sh "cat /etc/docker/daemon.json"
-                    sh "docker info"
-                }
-            }
-        }
         stage("获取代码。。。") {
             steps {
                 git branch: 'main', credentialsId: 'gitlab', url: 'http://192.168.11.116:8080/sre/code.git'
