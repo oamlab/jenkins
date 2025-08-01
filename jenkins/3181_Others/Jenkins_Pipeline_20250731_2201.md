@@ -284,7 +284,7 @@ export PATH=$PATH:/usr/local/go/bin
 #cat code.go
 package main
 import(
-	"fmt"
+    "fmt"
     "net/http"
 )
 func helloWorldHandler(w http.ResponseWriter,r *http.Request){
@@ -398,17 +398,17 @@ CMD ["sh","-c","/app/code"]
                  }
              }
          stage("执行编译。。。"){
-         	steps{
-             	container("go"){
+                steps{
+                 container("go"){
                  sh "export PATH=$PATH:/usr/local/go/bin;go build -o code -buildvcs=false ./"
                  sh "ls -lh ./"
                  }
              }
          }
          stage("构建镜像。。。"){
-         	steps{
-         	    git branch: 'main', credentialsId: 'gitlab', url: 'http://192.168.11.116:8080/sre/app.git'
-             	container("docker"){
+                steps{
+                     git branch: 'main', credentialsId: 'gitlab', url: 'http://192.168.11.116:8080/sre/app.git'
+             	     container("docker"){
                      sh "docker login -u admin -p Harbor12345 192.168.11.117:8088"
                      sh "ls -lh ./"
                      sh "docker build -t 192.168.11.117:8088/sre/app:v2.0 -f ./Dockerfile ."
@@ -417,8 +417,8 @@ CMD ["sh","-c","/app/code"]
              }
          }
          stage("部署应用。。。"){
-         	steps{
-             	container("kubectl"){
+                steps{
+                     container("kubectl"){
                      sh "kubectl --kubeconfig config apply -f app-dep.yaml"
                      sh "kubectl --kubeconfig config apply -f app-svc.yaml"
                  }
