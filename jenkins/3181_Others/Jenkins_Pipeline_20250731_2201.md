@@ -3,6 +3,11 @@
 
 ## 关于部署Jenkins Pipeline演示环境的概要资料 (Overview of deploying Jenkins  Pipeline demo environment)
 
+## 🔋 联系人
+| 姓名	     | 联系方式              |
+|---------|-------------------|
+| **兰正旺** | 1223790502@qq.com   |
+
 ---
 
 ### Jenkins Pipeline
@@ -24,7 +29,7 @@ Kubernetes v1.28.15
 cri-dockerd-0.3.8
 ```
 
- #### 安装与配置
+#### 安装与配置
 
 ```shell
 [root@gitlab code]# cat /etc/hosts
