@@ -304,7 +304,7 @@ go mod tidy
 ```shell
 #gitlab创建sre群组和go项目
 [root@k8s01 go]# git clone http://gitlab.test.com/sre/go.git
-[root@k8s01 go]# git config --global user.email " xxx@xxx.com"
+[root@k8s01 go]# git config --global user.email "example@example.localhost"
 [root@k8s01 go]# git config --global user.user "root"
 [root@k8s01 go]# git add *
 [root@k8s01 go]# git commit -m "first commit"
