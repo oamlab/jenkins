@@ -460,5 +460,5 @@ kube-system   kube-scheduler-k8s-192-168-11-118            1/1     Running   4 (
 Hello World[root@k8s-192-168-11-118 ~]# 
 ```
 
-![image-002](./images/image-002.png)
+
 
