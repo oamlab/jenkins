@@ -9,12 +9,8 @@
 
 ---
 
-
-
-![](https://www.jenkins.io/doc/book/resources/pipeline/realworld-pipeline-flow.png)
 ![image-001](./images/image-001.png)
-
-
+图片来源：https://www.jenkins.io/doc/book/resources/pipeline/realworld-pipeline-flow.png
 
 ### Kubernetes、GitLab、Jenkins 流水线部署
 
@@ -464,5 +460,5 @@ kube-system   kube-scheduler-k8s-192-168-11-118            1/1     Running   4 (
 Hello World[root@k8s-192-168-11-118 ~]# 
 ```
 
-<img width="2559" height="1515" alt="42a6f39c3a62d2f43656d7dbf2e7962" src="https://github.com/user-attachments/assets/6b255d7c-8b43-4ffa-9691-6b7534410220" />
+![image-002](./images/image-002.png)
 
