@@ -325,9 +325,9 @@ FROM 192.168.11.117:8088/sre/centos:stream9
 COPY local.repo /etc/yum.repos.d/local.repo
 ENV PATH=$PATH:/usr/local/go/bin
 RUN set -ex; \
-	yum -y install git tar; \
+    yum -y install git tar; \
     git clone http://192.168.11.117/sre/obs.git; \
-	cd obs && tar -C /usr/local -xzf go1.24.4.linux-amd64.tar.gz
+    cd obs && tar -C /usr/local -xzf go1.24.4.linux-amd64.tar.gz
 #docker-image
 FROM 192.168.11.117:8088/sre/centos:stream9
 COPY docker-ce.repo /etc/yum.repos.d/docker-ce.repo
