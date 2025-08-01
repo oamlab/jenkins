@@ -1,4 +1,4 @@
-
+<img width="2559" height="1515" alt="42a6f39c3a62d2f43656d7dbf2e7962" src="https://github.com/user-attachments/assets/4e812ee7-8e0b-4710-baab-92bf585078db" />
 
 
 
@@ -450,4 +450,5 @@ kube-system   kube-scheduler-k8s-192-168-11-118            1/1     Running   4 (
 Hello World[root@k8s-192-168-11-118 ~]# 
 ```
 
-![image-20250801084127290](C:\Users\兰正旺\AppData\Roaming\Typora\typora-user-images\image-20250801084127290.png)
+<img width="2559" height="1515" alt="42a6f39c3a62d2f43656d7dbf2e7962" src="https://github.com/user-attachments/assets/6b255d7c-8b43-4ffa-9691-6b7534410220" />
+
