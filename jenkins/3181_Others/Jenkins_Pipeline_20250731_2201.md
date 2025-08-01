@@ -375,11 +375,6 @@ spec:
     command:
     - "cat"
     tty: true
-    volumeMounts:
-    - name: data
-      mountPath: /var/run/docker.sock
-    - name: docker-config
-      mountPath: /etc/docker
   - name: docker
     image: "192.168.11.117:8088/sre/docker:v3.0"
     command:
@@ -387,19 +382,12 @@ spec:
     volumeMounts:
     - name: data
       mountPath: /var/run/docker.sock
-    - name: docker-config
-      mountPath: /etc/docker
     tty: true
   - name: kubectl
     image: "192.168.11.117:8088/sre/kubectl:v2.0"
     command:
     - "cat"
     tty: true
-    volumeMounts:
-    - name: data
-      mountPath: /var/run/docker.sock
-    - name: docker-config
-      mountPath: /etc/docker
 '''
         }
     }
