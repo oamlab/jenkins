@@ -409,12 +409,12 @@ CMD ["sh","-c","/app/code"]
                 steps{
                      git branch: 'main', credentialsId: 'gitlab', url: 'http://192.168.11.116:8080/sre/app.git'
              	     container("docker"){
-                     sh "docker login -u admin -p Harbor12345 192.168.11.117:8088"
-                     sh "ls -lh ./"
-                     sh "docker build -t 192.168.11.117:8088/sre/app:v2.0 -f ./Dockerfile ."
-                     sh "docker push 192.168.11.117:8088/sre/app:v2.0"
-                 }
-             }
+                       sh "docker login -u admin -p Harbor12345 192.168.11.117:8088"
+                       sh "ls -lh ./"
+                       sh "docker build -t 192.168.11.117:8088/sre/app:v2.0 -f ./Dockerfile ."
+                       sh "docker push 192.168.11.117:8088/sre/app:v2.0"
+                   }
+               }
          }
          stage("部署应用。。。"){
                 steps{
