@@ -430,6 +430,7 @@ spec:
 
  ```
  ```shell
+##增加代码扫描、单元测试、接口测试等步骤,具体待测试
 pipeline {
     agent {
         kubernetes {
