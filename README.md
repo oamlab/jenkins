@@ -50,7 +50,7 @@
 ## 📃 相关资料
 - 资料1：https://github.com/oamlab/oamlab/tree/main/OAMLab/401_运维实验/2023-04
 - 资料2：https://github.com/oamlab/oamlab/tree/main/OAMLab/401_运维实验/2023-06
-- 资料3：[关于部署Jenkins Pipeline演示环境的概要资料](./jenkins/3181_Others/Jenkins_Pipeline_20250731_2201.md)
+- 资料3：[兰正旺：关于部署Jenkins Pipeline演示环境的概要资料](./jenkins/3181_Others/Jenkins_Pipeline_20250731_2201.md)
 
 ## 📶 技术交流群
 深圳运维圈 QQ交流群：216589280 [点击加入](https://jq.qq.com/?_wv=1027&k=tdDtDoUp)
