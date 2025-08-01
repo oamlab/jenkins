@@ -1,7 +1,3 @@
-
-
-
-
 - OAMlab
 - https://github.com/oamlab
 
@@ -288,7 +284,7 @@ export PATH=$PATH:/usr/local/go/bin
 #cat code.go
 package main
 import(
-	"fmt"
+    "fmt"
     "net/http"
 )
 func helloWorldHandler(w http.ResponseWriter,r *http.Request){
@@ -308,7 +304,7 @@ go mod tidy
 ```shell
 #gitlab创建sre群组和go项目
 [root@k8s01 go]# git clone http://gitlab.test.com/sre/go.git
-[root@k8s01 go]# git config --global user.email " xxx@xxx.com"
+[root@k8s01 go]# git config --global user.email "example@example.localhost"
 [root@k8s01 go]# git config --global user.user "root"
 [root@k8s01 go]# git add *
 [root@k8s01 go]# git commit -m "first commit"
@@ -356,80 +352,97 @@ CMD ["sh","-c","/app/code"]
 
  ```yaml
  #流水线最终版本
- pipeline {
-     agent {
-         kubernetes {
-             cloud 'k8s'
-             showRawYaml true
-             yaml '''
- apiVersion: v1
- kind: Pod
- spec:
-   serviceAccount: jenkins-admin
-   securityContext:
-     runAsUser: 0
-   volumes:
-   - name: data
-     hostPath: 
-       path: /var/run/docker.sock
-   containers:
-   - name: go
-     image: "192.168.11.117:8088/sre/go:v2.0"
-     command:
-     - "cat"
-     tty: true
-   - name: docker
-     image: "192.168.11.117:8088/sre/docker:v2.0"
-     command:
-     - "cat"
-     volumeMounts:
-     - name: data
-       mountPath: /var/run/docker.sock
-     tty: true
-   - name: kubectl
-     image: "192.168.11.117:8088/sre/kubectl:v2.0"
-     command:
-     - "cat"
-     tty: true
- '''
-         }
-     }
-     stages {
-         stage("获取代码。。。") {
-             steps {
-                 git branch: 'main', credentialsId: 'gitlab', url: 'http://192.168.11.116:8080/sre/code.git'
-                 sh "ls -l ./"
-                 }
-             }
-         stage("执行编译。。。"){
-         	steps{
-             	container("go"){
-                 sh "export PATH=$PATH:/usr/local/go/bin;go build -o code -buildvcs=false ./"
-                 sh "ls -lh ./"
-                 }
-             }
-         }
-         stage("构建镜像。。。"){
-         	steps{
-         	    git branch: 'main', credentialsId: 'gitlab', url: 'http://192.168.11.116:8080/sre/app.git'
-             	container("docker"){
-                     sh "docker login -u admin -p Harbor12345 192.168.11.117:8088"
-                     sh "ls -lh ./"
-                     sh "docker build -t 192.168.11.117:8088/sre/app:v2.0 -f ./Dockerfile ."
-                     sh "docker push 192.168.11.117:8088/sre/app:v2.0"
-                 }
-             }
-         }
-         stage("部署应用。。。"){
-         	steps{
-             	container("kubectl"){
-                     sh "kubectl --kubeconfig config apply -f app-dep.yaml"
-                     sh "kubectl --kubeconfig config apply -f app-svc.yaml"
-                 }
-             }
-         }
-     }
- }
+pipeline {
+    agent {
+        kubernetes {
+            cloud 'k8s'
+            showRawYaml true
+            yaml '''
+apiVersion: v1
+kind: Pod
+spec:
+  serviceAccount: jenkins-admin
+  securityContext:
+    runAsUser: 0
+  volumes:
+  - name: data
+    hostPath: 
+      path: /var/run/docker.sock
+  - name: docker-config
+    hostPath:
+      path: /etc/docker
+      type: Directory
+  containers:
+  - name: go
+    image: "192.168.11.117:8088/sre/go:v2.0"
+    command:
+    - "cat"
+    tty: true
+    volumeMounts:
+    - name: data
+      mountPath: /var/run/docker.sock
+    - name: docker-config
+      mountPath: /etc/docker
+  - name: docker
+    image: "192.168.11.117:8088/sre/docker:v3.0"
+    command:
+    - "cat"
+    volumeMounts:
+    - name: data
+      mountPath: /var/run/docker.sock
+    - name: docker-config
+      mountPath: /etc/docker
+    tty: true
+  - name: kubectl
+    image: "192.168.11.117:8088/sre/kubectl:v2.0"
+    command:
+    - "cat"
+    tty: true
+    volumeMounts:
+    - name: data
+      mountPath: /var/run/docker.sock
+    - name: docker-config
+      mountPath: /etc/docker
+'''
+        }
+    }
+    stages {
+        stage("获取代码。。。") {
+            steps {
+                git branch: 'main', credentialsId: 'gitlab', url: 'http://192.168.11.116:8080/sre/code.git'
+                sh "ls -l ./"
+            }
+        }
+        stage("执行编译。。。") {
+            steps {
+                container("go") {
+                    sh "export PATH=$PATH:/usr/local/go/bin; go build -o code -buildvcs=false ./"
+                    sh "ls -lh ./"
+                }
+            }
+        }
+        stage("构建镜像。。。") {
+            steps {
+                git branch: 'main', credentialsId: 'gitlab', url: 'http://192.168.11.116:8080/sre/app.git'
+                container("docker") {
+                    sh "docker login -u admin -p Harbor12345 192.168.11.117:8088"
+                    sh "ls -lh ./"
+                    sh "docker build -t 192.168.11.117:8088/sre/app:v2.0 -f ./Dockerfile ."
+                    sh "docker push 192.168.11.117:8088/sre/app:v2.0"
+                }
+            }
+        }
+        stage("部署应用。。。") {
+            steps {
+                container("kubectl") {
+                    sh "kubectl --kubeconfig config apply -f app-dep.yaml"
+                    sh "kubectl --kubeconfig config apply -f app-svc.yaml"
+                }
+            }
+        }
+    }
+}
+
  ```
 
 ```shell
@@ -450,4 +463,5 @@ kube-system   kube-scheduler-k8s-192-168-11-118            1/1     Running   4 (
 Hello World[root@k8s-192-168-11-118 ~]# 
 ```
 
-![image-20250801084127290](C:\Users\兰正旺\AppData\Roaming\Typora\typora-user-images\image-20250801084127290.png)
+<img width="2559" height="1515" alt="42a6f39c3a62d2f43656d7dbf2e7962" src="https://github.com/user-attachments/assets/6b255d7c-8b43-4ffa-9691-6b7534410220" />
+
