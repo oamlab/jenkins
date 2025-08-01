@@ -12,7 +12,7 @@
 
 
 ![](https://www.jenkins.io/doc/book/resources/pipeline/realworld-pipeline-flow.png)
-![image-001](.\images\image-001.png)
+![image-001](./images/image-001.png)
 
 
 
