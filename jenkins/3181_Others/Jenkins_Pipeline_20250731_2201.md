@@ -429,6 +429,176 @@ spec:
 }
 
  ```
+ ```shell
+pipeline {
+    agent {
+        kubernetes {
+            cloud 'k8s'
+            showRawYaml true
+            yaml '''
+apiVersion: v1
+kind: Pod
+spec:
+  serviceAccount: jenkins-admin
+  securityContext:
+    runAsUser: 0
+  volumes:
+  - name: data
+    hostPath:
+      path: /var/run/docker.sock
+  - name: docker-config
+    hostPath:
+      path: /etc/docker
+      type: Directory
+  - name: reports
+    emptyDir: {}
+  containers:
+  - name: go
+    image: 192.168.11.117:8088/sre/go:v2.0
+    command: ["cat"]
+    tty: true
+    volumeMounts:
+    - name: reports
+      mountPath: /reports
+  - name: docker
+    image: 192.168.11.117:8088/sre/docker:v3.0
+    command: ["cat"]
+    tty: true
+    volumeMounts:
+    - name: data
+      mountPath: /var/run/docker.sock
+    - name: reports
+      mountPath: /reports
+  - name: kubectl
+    image: 192.168.11.117:8088/sre/kubectl:v2.0
+    command: ["cat"]
+    tty: true
+  - name: sonar
+    image: 192.168.11.117:8088/sre/sonar-scanner-cli:v4.8
+    command: ["cat"]
+    tty: true
+    volumeMounts:
+    - name: reports
+      mountPath: /reports
+  - name: clamav
+    image: 192.168.11.117:8088/sre/clamav:v1.0
+    command: ["cat"]
+    tty: true
+    volumeMounts:
+    - name: reports
+      mountPath: /reports
+  - name: trivy
+    image: 192.168.11.117:8088/sre/trivy:v0.45
+    command: ["cat"]
+    tty: true
+    volumeMounts:
+    - name: reports
+      mountPath: /reports
+  - name: newman
+    image: 192.168.11.117:8088/sre/newman:6-alpine
+    command: ["cat"]
+    tty: true
+    volumeMounts:
+    - name: reports
+      mountPath: /reports
+'''
+        }
+    }
+    stages {
+        stage('获取代码') {
+            steps {
+                git branch: 'main', credentialsId: 'gitlab', url: 'http://192.168.11.116:8080/sre/code.git'
+                sh 'ls -l ./'
+            }
+        }
+
+        stage('编译前检查') {
+            parallel {
+                stage('代码规范') {
+                    steps {
+                        container('sonar') {
+                            sh 'sonar-scanner -Dsonar.projectKey=code -Dsonar.sources=. -Dsonar.host.url=http://192.168.11.117:9000 -Dsonar.login=$SONAR_TOKEN'
+                        }
+                    }
+                }
+                stage('单元测试') {
+                    steps {
+                        container('go') {
+                            sh 'export PATH=$PATH:/usr/local/go/bin && go test -v ./... -coverprofile=coverage.out && go tool cover -html=coverage.out -o /reports/coverage.html'
+                        }
+                    }
+                }
+                stage('源码病毒扫描') {
+                    steps {
+                        container('clamav') {
+                            sh 'freshclam && clamscan -r --infected /workspace > /reports/source-virus.txt || true'
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('编译') {
+            steps {
+                container('go') {
+                    sh 'export PATH=$PATH:/usr/local/go/bin && go build -o code -buildvcs=false ./'
+                    sh 'ls -lh ./'
+                }
+            }
+        }
+
+        stage('编译后漏洞扫描') {
+            steps {
+                container('trivy') {
+                    sh 'trivy fs --format template --template "@contrib/html.tpl" -o /reports/trivy-fs.html .'
+                }
+            }
+        }
+
+        stage('构建镜像') {
+            steps {
+                git branch: 'main', credentialsId: 'gitlab', url: 'http://192.168.11.116:8080/sre/app.git'
+                container('docker') {
+                    sh '''
+                      docker login -u admin -p Harbor12345 192.168.11.117:8088
+                      docker build -t 192.168.11.117:8088/sre/app:v2.0 -f ./Dockerfile .
+                      docker push 192.168.11.117:8088/sre/app:v2.0
+                    '''
+                }
+            }
+        }
+
+        stage('部署应用') {
+            steps {
+                container('kubectl') {
+                    sh 'kubectl --kubeconfig=config apply -f app-dep.yaml'
+                    sh 'kubectl --kubeconfig=config apply -f app-svc.yaml'
+                }
+            }
+        }
+
+        stage('接口测试') {
+            steps {
+                container('newman') {
+                    sh '''
+                      newman run tests/postman-collection.json \
+                        --environment tests/postman-env.json \
+                        --reporters junit,html \
+                        --reporter-junit-export /reports/api-junit.xml \
+                        --reporter-html-export   /reports/api.html
+                    '''
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            archiveArtifacts artifacts: 'reports/**', allowEmptyArchive: true
+        }
+    }
+}
+```
 
 ```shell
 [root@k8s-192-168-11-118 ~]# kubectl get pod -A
