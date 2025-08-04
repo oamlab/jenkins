@@ -353,7 +353,7 @@ CMD ["sh","-c","/app/code"]
 ```
 
  ```yaml
- #流水线最终版本
+ #参考1：常规范例
 pipeline {
     agent {
         kubernetes {
@@ -435,7 +435,7 @@ spec:
 
  ```
  ```shell
-##增加代码扫描、单元测试、接口测试等步骤,具体待测试
+##参考2：含代码扫描、单元测试、接口测试等步骤
 pipeline {
     agent {
         kubernetes {
