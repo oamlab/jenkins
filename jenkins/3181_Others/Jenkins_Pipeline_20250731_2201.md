@@ -352,7 +352,7 @@ EXPOSE 8080
 CMD ["sh","-c","/app/code"]
 ```
 
- ```yaml
+```yaml
  #参考1：常规范例
 pipeline {
     agent {
@@ -433,8 +433,9 @@ spec:
     }
 }
 
- ```
- ```shell
+```
+
+```shell
 ##参考2：含代码扫描、单元测试、接口测试等步骤
 pipeline {
     agent {
