@@ -25,6 +25,7 @@
 |--------------|-------------------|
 | **Kuang Bo** | 1214966109@qq.com |
 | **Qiu Ke**   | 23198985@qq.com   |
+| **Zw Lan**   | 1223790502@qq.com   |
 
 ## 🔒 Background
 - XXX
@@ -47,6 +48,7 @@
 ## 📃 Others
 - Part 1: https://github.com/oamlab/oamlab/tree/main/OAMLab/401_运维实验/2023-04
 - Part 2: https://github.com/oamlab/oamlab/tree/main/OAMLab/401_运维实验/2023-06
+- Part 3：[Zw Lan：Overview of deploying Jenkins Pipeline demo environment](./jenkins/3181_Others/Jenkins_Pipeline_20250731_2201.md)
 
 ## 📶 Technical Exchange Club
 (CN)SHENZHEN OAM CLUB, QQ group：216589280 [Click to join](https://jq.qq.com/?_wv=1027&k=tdDtDoUp)
